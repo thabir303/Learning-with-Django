@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Home Page</title>
+</head>
+<body>
+    <!-- <h1>Welcome, {{post}} !</h1> -->
+    {% if posts %}
+     <h1>Posts are available</h1>
+        {% for post in posts %}
+            <h1> Id = {{post.id}} - {{post.title}} </h1>
+            <p> {{post.content}}</p>
+        {% endfor %}
+    {% elif posts|length == 0 %}
+      <h1>Inside of elif statement.</h1>
+    {% else %}
+        <h1>No posts are available</h1>
+    {% endif %}
+    
+    <!-- <h1>{{list}}</h1> -->
+</body>
+</html>
