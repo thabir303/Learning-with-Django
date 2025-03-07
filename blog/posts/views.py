@@ -30,7 +30,7 @@ posts = [
     }
 ]
 
-posts=[]
+# posts=[]
 def home(request):
     html=""
     for post in posts:
@@ -41,8 +41,8 @@ def home(request):
             <p1> {post['content'] } </p1>
             </div>
         '''
-    name = "Tanvir Hasan Abir"
-    return render(request,'posts/home.html',{"posts":posts})
+    username = "tanvir Hasan Abir"
+    return render(request,'posts/home.html',{"posts":posts,"username" : username})
 
 def post(request,id):
     valid_id = False
@@ -52,11 +52,7 @@ def post(request,id):
             valid_id = True
             break
     if valid_id:
-        html = f'''
-            <h1> {post_dict['title']}  </h1>
-            <p> {post_dict['content']} </p>
-        '''
-        return HttpResponse(html)
+        return render(request,"posts/post.html",{"post_dict":post_dict })
     else : 
         return HttpResponseNotFound("Post is not found :(")
 
