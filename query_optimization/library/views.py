@@ -51,7 +51,9 @@ def index_optimization_example(request):
 class AuthorViewSet(viewsets.ModelViewSet):
     queryset = Author.objects.all()
     serializer_class = AuthorSerializer
+    print(f'Author query: ', queryset.explain())
 
 class BookViewSet(viewsets.ModelViewSet):
     queryset = Book.objects.prefetch_related('authors').select_related('author').all()
     serializer_class = BookSerializer
+    print('Book query: ', queryset.explain())
