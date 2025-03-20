@@ -4,14 +4,14 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECURITY WARNING: keep the secret key used in production secret!
+# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-67y8nvb+l-qmhm0^t1gfm-ewl%q#72c7jg-e2^ri&g@0-lcvda'
 
 DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
+AUTH_USER_MODEL = 'library.CustomUser'
 
 INSTALLED_APPS = [
     'django.contrib.admin',
