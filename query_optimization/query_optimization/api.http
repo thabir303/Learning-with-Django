@@ -1,0 +1,18 @@
+### Post User
+POST http://localhost:8000/api/token/ HTTP/1.1
+Content-Type: application/json
+
+{
+    "email": "abir@gmail.com",
+    "password": "abir123"
+}
+
+### GET User
+GET http://localhost:8000/api/books/1 HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQyNjY4NTg2LCJpYXQiOjE3NDI2NjgyODYsImp0aSI6IjY2YTJmNGViZGVlZDQ2Y2Y4NmY1ZjdmNDcxYzUxYWI5IiwidXNlcl9pZCI6MX0.nhEWmOFpQ8k0mNtcF87fG3IOZmaNhkSbBnGW-RZ-5Rg
+
+{
+    "email": "abir@gmail.com",
+    "password": "abir123"
+}

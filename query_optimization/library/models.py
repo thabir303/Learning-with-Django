@@ -20,6 +20,7 @@ from django.db import models
 from django.utils import timezone
 from .managers import CustomUserManager
 from django.contrib.auth.models import AbstractBaseUser,PermissionsMixin
+from django.contrib.auth import get_user_model
 
 class CustomUser(AbstractBaseUser,PermissionsMixin):
     email = models.EmailField(unique=True)
@@ -56,7 +57,7 @@ def get_default_publisher():
 
 class Book(models.Model):
     title = models.CharField(max_length=100)
-    author = models.ForeignKey(Author,on_delete=models.CASCADE)
+    author = models.ForeignKey(get_user_model(),on_delete=models.CASCADE)
     publisher = models.ForeignKey(Publisher, on_delete=models.CASCADE, default= get_default_publisher)
     published_date = models.DateField(default=timezone.now)
 

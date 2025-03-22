@@ -61,26 +61,38 @@
 
 # library/views.py
 
+from .permissions import IsOwnerOrReadOnly
 from rest_framework import viewsets
+from rest_framework.permissions import IsAuthenticated
 from .models import Author, Publisher, Book, BookReview, Genre, BookGenre
 from .serializers import AuthorSerializer, PublisherSerializer, BookSerializer, BookReviewSerializer, GenreSerializer
 
 class AuthorViewSet(viewsets.ModelViewSet):
     queryset = Author.objects.all()
     serializer_class = AuthorSerializer
+    permission_classes = [IsAuthenticated]
 
 class PublisherViewSet(viewsets.ModelViewSet):
     queryset = Publisher.objects.all()
     serializer_class = PublisherSerializer
+    permission_classes = [IsAuthenticated]
+
 
 class BookViewSet(viewsets.ModelViewSet):
     queryset = Book.objects.select_related('author', 'publisher').prefetch_related('bookgenre_set__genre', 'bookreview_set').all()  # Optimized query
     serializer_class = BookSerializer
+    permission_classes = [IsAuthenticated,IsOwnerOrReadOnly]
+
+    def perform_create(self,serializer):
+        serializer.save(author=self.request.user)
 
 class BookReviewViewSet(viewsets.ModelViewSet):
     queryset = BookReview.objects.select_related('book').all()
     serializer_class = BookReviewSerializer
+    permission_classes = [IsAuthenticated]
 
 class GenreViewSet(viewsets.ModelViewSet):
     queryset = Genre.objects.all()
     serializer_class = GenreSerializer
+    permission_classes = [IsAuthenticated]
+
